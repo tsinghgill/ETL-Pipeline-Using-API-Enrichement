@@ -1,7 +1,7 @@
 const { googleMapsLookup, generateAddressObject } = require('./helpers/googleMapsApi')
 
 exports.App = class App {
-  transform(records) {
+  async transform(records) {
     for (const record of records) {
       const customer_address = record.get("customer_address")
       console.log("[DEBUG] customer_address ===> ", customer_address)
@@ -11,7 +11,7 @@ exports.App = class App {
         return
       }
 
-      const googleMapsLookupResponse = googleMapsLookup(customer_address)
+      const googleMapsLookupResponse = await googleMapsLookup(customer_address)
       console.log("[DEBUG] googleMapsLookupResponse ===> ", JSON.stringify(googleMapsLookupResponse))
   
       if (!googleMapsLookupResponse) {
